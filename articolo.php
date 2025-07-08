@@ -11,6 +11,8 @@
     }
 
     $sql = "SELECT art.titolo, art.longitudine, art.latitudine, art.sottotitolo, art.contenuto, art.categoria_id,
+            art.numTel AS numero1,
+            art.numTel_2 AS numero2,
             CONCAT(acc.nome,' ',acc.cognome) AS autore,
             c.nome AS categoria,
             i.file AS immagine
@@ -65,10 +67,11 @@
                         <h2>Dove si trova</h2>
                         <div class="col-lg-6" id ="map">                        
                         </div>
-                        <div class="col-lg-6">                        
-                            <a href ="https://www.google.it/maps/dir//<?= $articoli['latitudine'] ?>,<?= $articoli['longitudine']?>?hl=it" class=" btn-resp" style="margin-left:3rem; padding:0.5rem; text-decoration:none;">Vai al navigatore</a>
-                        </div>
-                        
+                        <div class="col-lg-2">                        
+                            <a href ="https://www.google.it/maps/dir//<?= $articoli['latitudine'] ?>,<?= $articoli['longitudine']?>?hl=it" class=" btn-resp" style="margin-left:3rem; padding:0.5rem; text-decoration:none;">Vai al navigatore</a><br><br>
+                            <a href ="tel:+39<?= $articoli['numero1'] ?>" class=" btn-resp" style="margin-left:3rem; padding:0.5rem; text-decoration:none;" >Telefona al numero 1</a><br><br>
+                            <a href ="tel:+39<?= $articoli['numero2'] ?>" class=" btn-resp" style="margin-left:3rem; padding:0.5rem; text-decoration:none;">Telefona al numero 2</a>
+                        </div>                      
                     </div>                                        
                 </div>
             </div>     

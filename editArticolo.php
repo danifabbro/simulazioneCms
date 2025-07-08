@@ -23,16 +23,19 @@
         'immagine_id' => null, 'pubblicato' => false,
         'immagine_file' => '', 'immagine_alt' => '',
         'latitudine' => 0 , 'longitudine' => 0,
+        'numTel' => 0 , 'numTel_2' => 0,
     ];
 
     $errori = [
         'avviso' => '', 'titolo' => '' , 'sottotitolo' => '', 'contenuto' => '', 'autore' => '', 'categoria' => '', 'immagine_file' => '', 'immagine_alt' => '','immagine_id'=> null,
-        'latitudine' => '', 'longitudine' => '',
+        'latitudine' => '', 'longitudine' => '', 'numTel' => '', 'numTel_2' => '',
     ]; 
 
     if($id){
         $sql = "SELECT art.id, art.titolo, art.sottotitolo, art.contenuto, art.categoria_id, art.account_id, art.immagine_id, art.pubblicato,
                 art.latitudine, art.longitudine, 
+                art.numTel, 
+                art.numTel_2, 
                 imm.file AS immagine_file,
                 imm.alt AS immagine_alt
                 FROM articoli AS art
@@ -103,7 +106,9 @@
         $articoli['account_id'] = $_POST['account_id'];
         $articoli['categoria_id'] = $_POST['categoria_id'];
         $articoli['latitudine'] = $_POST['latitudine'];
-        $articoli['longitudine'] = $_POST['longitudine'];    
+        $articoli['longitudine'] = $_POST['longitudine'];
+        $articoli['numTel'] = $_POST['numero1'];
+        $articoli['numTel_2'] = $_POST['numero2'];   
         $articoli['pubblicato'] = $articoli['pubblicato'] = isset($_POST['pubblicato']) ? 1 : 0; // se il post è pubblicato
 
         //---convalida dati dell'articolo nelle variabili errori con i messaggi
@@ -114,6 +119,8 @@
         $errori['categoria'] = is_categoria_id($articoli['categoria_id'],$categorie) ? "" : "Per favore seleziona una categoria";
         $errori['latitudine'] = ($articoli['latitudine'] <= 90 ) ? "" : "Inserisci una coordinata corretta";
         $errori['longitudine'] = ($articoli['longitudine'] <= 180) ? "" : "Inserisci una coordinata corretta";
+        $errori['numTel'] = ($articoli['numTel'] >= 20) ? "" : "Inserisci un numero corretto";
+        $errori['numTel_2'] = ($articoli['numTel_2'] >= 20) ? "" : "Inserisci un numero corretto";
 
         //uniamo gli errori
         $invalid = implode($errori);
@@ -140,11 +147,12 @@
                 
                 if($id){
                     $sql = "UPDATE articoli SET titolo = :titolo, sottotitolo = :sottotitolo, contenuto = :contenuto, categoria_id = :categoria_id, account_id = :account_id,
-                    immagine_id = :immagine_id, latitudine = :latitudine, longitudine = :longitudine, pubblicato = :pubblicato
+                    immagine_id = :immagine_id, latitudine = :latitudine, longitudine = :longitudine, numTel = :numTel, numTel_2 = :numTel_2, pubblicato = :pubblicato
                     WHERE id = :id;";
                 }else{
                     unset($arguments['id']);
-                    $sql = "INSERT INTO articoli (titolo, sottotitolo, contenuto, categoria_id, account_id, immagine_id, latitudine, longitudine, pubblicato) VALUES (:titolo, :sottotitolo, :contenuto, :categoria_id, :account_id, :immagine_id, :latitudine, :longitudine, :pubblicato);";
+                    $sql = "INSERT INTO articoli (titolo, sottotitolo, contenuto, categoria_id, account_id, immagine_id, latitudine, longitudine, numTel, numTel_2, pubblicato) 
+                    VALUES (:titolo, :sottotitolo, :contenuto, :categoria_id, :account_id, :immagine_id, :latitudine, :longitudine, :numTel, :numTel_2, :pubblicato);";
                 }               
 
                 pdo($pdo, $sql, $arguments); //sql per aggiungere l'articolo
@@ -261,6 +269,18 @@
                                     <h6>Longitudine:</h6>
                                     <input type="text" class="form-control" style="max-width: 400px;" name="longitudine" id="longitudine" value="<?= $articoli['longitudine'] ?>" required>
                                     <span class="errors text-danger"><?= $errori['longitudine']?></span>
+                                </div>
+
+                                 <div class="mb-3">
+                                    <h6>Numero di Telefono 1:</h6>
+                                    <input type="text" class="form-control" style="max-width: 400px;" name="numero1" id="numero1" value="<?= $articoli['numTel'] ?>" required>
+                                    <span class="errors text-danger"><?= $errori['numTel']?></span>
+                                </div>
+
+                                 <div class="mb-3">
+                                    <h6>Numero di Telefono 2:</h6>
+                                    <input type="text" class="form-control" style="max-width: 400px;" name="numero2" id="numero2" value="<?= $articoli['numTel_2'] ?>" required>
+                                    <span class="errors text-danger"><?= $errori['numTel_2']?></span>
                                 </div>
                             </div> 
                             <div class="col-lg-3">                                 
