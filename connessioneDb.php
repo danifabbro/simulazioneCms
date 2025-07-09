@@ -1,7 +1,7 @@
 <?php
     $type = "mysql";
     $server = "localhost";
-    $db = "cms";
+    $db = "case";
     $port ="3306";
     $charset = "utf8mb4";
         
