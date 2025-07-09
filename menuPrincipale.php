@@ -36,7 +36,11 @@
     <body class="container-fluid">                                                            
         <div class="row justify-content-around">
             <?php include "header.php"; ?>   
-            <?php foreach($articoli as $articolo){ ?>                   
+            <?php foreach($articoli as $articolo){ 
+                if($articolo['immagine'] == false){                    
+                    continue ;
+                }                
+                ?>                   
                 <div class="col-lg-4 mt-5 text-center bg-white p-5 mb-3 box-articolo">                        
                     <h2 class="mb-5">
                         <?= html_escape($articolo['titolo']);?>
@@ -47,7 +51,7 @@
                     <p>
                         <a style="text-decoration:none; padding:0.5rem;" class="btn-resp" href="articolo.php?id=<?= $articolo['id'] ?>">Scopri di più</a>
                     <p>                        
-                    <img style="border-radius: 10px 10px 10px 10px; height:300px; width:400px;" class="mt-5 img-fluid img-articolo" src="../simulazioneCms/img/<?= html_escape($articolo['immagine']) ?>">                                                                  
+                    <img style="border-radius: 10px 10px 10px 10px; height:300px; width:400px;" class="mt-5 img-fluid img-articolo" src="../simulazioneCms/img/<?= /*problema grave*/ html_escape($articolo['immagine']) ?>">                                                                  
                     <div class="row mt-5">                           
                         <div class="col-3">
                             <p>

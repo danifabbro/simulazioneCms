@@ -279,7 +279,7 @@
 
                                  <div class="mb-3">
                                     <h6>Numero di Telefono 2:</h6>
-                                    <input type="text" class="form-control" style="max-width: 400px;" name="numero2" id="numero2" value="<?= $articoli['numTel_2'] ?>" required>
+                                    <input type="text" class="form-control" style="max-width: 400px;" name="numero2" id="numero2" value="<?= $articoli['numTel_2'] ?>">
                                     <span class="errors text-danger"><?= $errori['numTel_2']?></span>
                                 </div>
                             </div> 
