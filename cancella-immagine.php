@@ -10,23 +10,23 @@
         redirect('editImmagini.php', ['failure' => 'Immagine non trovata']);
     }
 
-    $sql = "SELECT id,file,alt FROM categoria WHERE id = :id ;";
-    $categoria = pdo($pdo,$sql,[$id])->fetchColumn();
-    if(!$categoria)
+    $sql = "SELECT id,file,alt FROM immagini WHERE id = :id ;";
+    $immagine = pdo($pdo,$sql,[$id])->fetchColumn();
+    if(!$immagine)
     {
-        redirect('editCategorie.php', ['failure' => 'Categoria non trovata']);
+        redirect('editImmagini.php', ['failure' => 'Categoria non trovata']);
     }
 
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         try{
-            $sql = "DELETE FROM categoria WHERE id = :id;";
+            $sql = "DELETE FROM immagini WHERE id = :id;";
             pdo($pdo,$sql,[$id]);
-            redirect('editCategorie.php', ['success' => 'Categoria cancellata con successo']);
+            redirect('editImmagini.php', ['success' => 'Categoria cancellata con successo']);
         }catch(PDOException $e){
             if($e->errorInfo[1] === 1451){
-                redirect('editCategorie.php', ['failure'=>'Categoria già cancellata']);
+                redirect('editImmagini.php', ['failure'=>'Categoria già cancellata']);
             }else{
                 throw $e;
             }
@@ -58,10 +58,10 @@
                 <?php include "header.php"; ?>    
             </section>
             <section>
-                <form action="cancella-categoria.php?id=<?= $id ?>" method="POST" class="narrow">
-                    <p> Clicca per confermare la cancellazione della categoria <?= html_escape($categoria) ?></p>
+                <form action="cancella-immagine.php?id=<?= $id ?>" method="POST" class="narrow">
+                    <p> Clicca per confermare la cancellazione dell'immagine <?= html_escape($immagine) ?></p>
                     <input type = "submit" name="cancella" value="conferma" class="btn btn-primary">
-                    <a href="editCategorie.php" class="btn btn-danger"> Cancella </a>
+                    <a href="editImmagini.php" class="btn btn-danger"> Cancella </a>
                 </form>
             </section>                
         </div>        

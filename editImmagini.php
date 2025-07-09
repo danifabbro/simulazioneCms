@@ -39,7 +39,7 @@
                             <tr>                               
                                 <td><img style="width:400px; height:300px;" class="mt-5" src="../simulazioneCms/img/<?= html_escape($immagine['file']) ?>"></td>
                                 <td><?= html_escape($immagine['alt']) ?></td>
-                                <td><a style="padding:1rem; text-decoration:none;" class="btn-danger" href ="cancella-immagine.php?id=<?= $categoria['id'] ?>">Cancella</a></td>
+                                <td><a style="padding:1rem; text-decoration:none;" class="btn-danger" href ="cancella-immagine.php?id=<?= $immagine['id'] ?>">Cancella</a></td>
                             </tr>
                     <?php } ?>
                     </table>                                    
