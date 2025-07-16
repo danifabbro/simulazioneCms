@@ -174,7 +174,6 @@
             }
         }       
     }     
-
     $sql = "SELECT id, nome FROM categoria WHERE navigazione = 1;";
     $navigazione = pdo($pdo,$sql)->fetchAll();   
     $sezione = '';
