@@ -20,6 +20,5 @@
     }
     catch (PDOException $e){
         throw new PDOException($e->getMessage(), $e->getCode());
-    }
-
+    }    
 ?>
