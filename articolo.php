@@ -48,9 +48,6 @@
         <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
         <link rel="stylesheet" href="https://danielfabretti.hopto.org/simulazioneCms/stileApp.css" type="text/css">
-        <style>
-            
-        </style>
     </head>        
         <body class="container-fluid">
             <div class="row">
