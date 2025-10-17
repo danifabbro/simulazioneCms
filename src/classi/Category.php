@@ -51,7 +51,20 @@
 
         //-----MODIFICARE UNA CATEGORIA-------
 
-        
+        public function update(array $category): bool
+        {
+            try{
+                $sql = "UPDATE categoria  SET nome = :nome, descrizione = :descrizione, navigazione = :navigazione) WHERE id = :id;";
+                $this->db->runSQL($sql, $category);
+                return true;
+            }catch(PDOException $e){
+                if($e->errorInfo[1] === 1062){
+                    return false;
+                }else{
+                    throw $e;
+                }
+            }
+        }
 
     }
 ?>
