@@ -1,39 +1,20 @@
 <?php
-    require "connessioneDb.php";
-    require "funzioni.php";
+    declare(strict_types = 1);
+    include '../src/bootstrap.php';
 
     $id = filter_input(INPUT_GET,'id',FILTER_VALIDATE_INT);
     if(!$id){
-        echo "id non trovato";
+        include APP_ROOT . '/public/page-not-found.php';
     }
 
-    $sql = "SELECT id, nome, descrizione FROM categoria WHERE id = :id;";
-    $categoria = pdo($pdo,$sql, [$id])->fetch();
-
+    $categoria = $cms->getCategory()->get($id);
     if(!$categoria){
-        echo "categoria errata";
+        include APP_ROOT . '/public/page-not-found.php';
     }
 
-    //visualizzazione dei dati nella pagina attraverso una select
-    $sql = "SELECT art.id, art.titolo,art.sottotitolo,art.categoria_id, art.contenuto,art.account_id, CONCAT(acc.nome,' ',acc.cognome) AS autore,
-                   c.nome, c.descrizione, imm.file
-            FROM articoli AS art
-            LEFT JOIN account AS acc ON art.account_id = acc.id
-            LEFT JOIN categoria AS c ON art.categoria_id = c.id
-            LEFT JOIN immagini  AS imm ON art.immagine_id = imm.id
-            WHERE art.categoria_id = :id AND art.pubblicato = 1 
-            ORDER BY art.id DESC;"; // cerco per categoria id cosi da includere più articoli dello stesso tipo. 
-    $articoli = pdo($pdo,$sql,[$id])->fetchAll();
 
+    $articoli = $cms->getArticle()->getAll(true,$id);
 
-    // collegamento con le informazione del menu header
-    $sql = "SELECT id,nome FROM categoria WHERE navigazione = 1;"; // si usa un numero sotto navigazione per richiamare l'id nella variabile categoria cosi da collegarla alla header in sezione
-    $navigazione = pdo($pdo,$sql)->fetchAll();
-
-    //variabili valorizzate per l'header col richiamo dei dati della categoria
-    $sezione = $categoria['id'];
-    $title = $categoria['nome'];
-    $descrizione = $categoria['descrizione'];
 ?>
 <!DOCTYPE html>
 <html lang = "it-IT">

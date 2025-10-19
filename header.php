@@ -26,7 +26,7 @@
                     <ul style="display:flex; margin:2rem;">
                         <?php foreach($navigazione as $link){ ?>
                             <li style="list-style-type:none; margin-right:2rem;" class="list-nav">
-                                <a class="btn-resp" style="padding:0.5rem; text-decoration:none;" href="categoria.php?id=<?= $link['id']?>"
+                                <a class="btn-resp" style="padding:0.5rem; text-decoration:none;" href="https://danielfabretti.hopto.org/simulazioneCms/public/categoria.php?id=<?= $link['id']?>"
                                     <?= ($sezione == $link['id'] ) ? 'class="on" aria-current="page" ' : '' ?>>
                                     <?= html_escape($link['nome']) ?>
                                 </a>
